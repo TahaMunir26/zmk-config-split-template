@@ -33,29 +33,14 @@ jobs:
         run: west update
       - name: West Zephyr export
         run: west zephyr-export
-      - name: West Build (KEYBOARD_TITLE Left)
-        run: west build -s zmk/app -b BOARD_NAME -- -DSHIELD=SHIELD_NAME_left -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
-      - name: KEYBOARD_TITLE DTS File
-        if: ${{ always() }}
-        run: cat -n build/zephyr/BOARD_NAME.dts.pre.tmp
-      - name: KEYBOARD_TITLE Left Kconfig file
+      - name: West Build (my_mouse)
+        run: west build -s zmk/app -b nice_nano_v2 -- -DSHIELD=my_mouse -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+      - name: my_mouse Kconfig file
         run: cat build/zephyr/.config | grep -v "^#" | grep -v "^$"
       - name: Rename zmk.uf2
-        run: cp build/zephyr/zmk.uf2 SHIELD_NAME_left_BOARD_NAME.uf2
-      - name: Archive (KEYBOARD_TITLE Left)
+        run: cp build/zephyr/zmk.uf2 my_mouse_nice_nano_v2.uf2
+      - name: Archive Firmware
         uses: actions/upload-artifact@v4
         with:
           name: firmware
-          path: SHIELD_NAME_left_BOARD_NAME.uf2
-      - name: West Build (KEYBOARD_TITLE Right)
-        run: west build --pristine -s zmk/app -b BOARD_NAME -- -DSHIELD=SHIELD_NAME_right -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
-
-      - name: KEYBOARD_TITLE Right Kconfig file
-        run: cat build/zephyr/.config | grep -v "^#" | grep -v "^$"
-      - name: Rename zmk.uf2
-        run: cp build/zephyr/zmk.uf2 SHIELD_NAME_right_BOARD_NAME.uf2
-      - name: Archive (KEYBOARD_TITLE Right)
-        uses: actions/upload-artifact@v4
-        with:
-          name: firmware
-          path: SHIELD_NAME_right_BOARD_NAME.uf2
+          path: my_mouse_nice_nano_v2.uf2
