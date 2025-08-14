@@ -23,12 +23,6 @@
     };
 };
 
-&pmw3360 {
-    status = "okay";
-    cs-gpios = <&pro_micro 32 0>;  // Use pin P1.00 (D6) as CS
-    motion-gpios = <&pro_micro 11 0>; // Use pin P0.11 (D7) as MOTION
-};
-
 &encoder {
     status = "okay";
 };
