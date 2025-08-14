@@ -5,24 +5,10 @@
 / {
     keymap {
         compatible = "zmk,keymap";
-
         default_layer {
             buttons = <
                 &mkp LCLK  &mkp RCLK  &mkp MCLK  &mkp FWD  &mkp BACK
             >;
         };
     };
-
-    sensors {
-        compatible = "zmk,sensors";
-        sensors = <&pmw3360>;
-    };
-
-    chosen {
-        zmk,pointing-device = &pmw3360;
-    };
-};
-
-&encoder {
-    status = "okay";
 };
